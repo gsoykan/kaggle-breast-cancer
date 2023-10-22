@@ -1,0 +1,9 @@
+_target_: src.data.breast_datamodule.BreastDataModule
+data_dir: ${paths.data_dir}
+train_img_dir: inzva-ml-bootcamp-class-2-kaggle-challenge/train/train
+test_img_dir: inzva-ml-bootcamp-class-2-kaggle-challenge/test/test
+csv_file: inzva-ml-bootcamp-class-2-kaggle-challenge/train.csv
+batch_size: 32 # Needs to be divisible by the number of devices (e.g., if in a distributed setup)
+train_val_test_split: [0.9, 0.05, 0.05]
+num_workers: 0
+pin_memory: False

@@ -1,0 +1,47 @@
+# @package _global_
+
+# to execute this experiment run:
+# python train.py experiment=example
+
+defaults:
+  - override /data: breast
+  - override /model: breast
+  - override /callbacks: default
+  - override /trainer: gpu
+
+# all parameters below will be merged with parameters from default configurations set above
+# this allows you to overwrite only specified parameters
+
+tags: ["breast", "kaggle", "inzva"]
+
+seed: 12345
+
+trainer:
+  min_epochs: 5
+  max_epochs: 10
+  gradient_clip_val: 0.5
+  precision: 16
+
+model:
+  optimizer:
+    lr: 0.0002
+  net:
+    output_size: 6
+  compile: false
+
+data:
+  batch_size: 16
+  num_workers: 8
+
+callbacks:
+  early_stopping:
+    monitor: "val/acc"
+    patience: 2
+    mode: "max"
+
+logger:
+  wandb:
+    tags: ${tags}
+    group: "inzva"
+  aim:
+    experiment: "breast_cancer"
